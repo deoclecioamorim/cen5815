@@ -59,7 +59,7 @@ head(dados)
 #'
 #'Modelo estatístico: y_ij = m + t_i + e_ij
 
-modelo <- lm(y ~ trat, dados)
+modelo <- lm(y ~ trat, data=dados)
 
 # Obtenção dos resíduos
 #' 
@@ -212,8 +212,8 @@ dev.off() # Fecha a janela gráfica
 #'
 #'Hipóteses
 #' 
-#'H0: a variável dependente segue distribuição normal;
-#'Ha: a variável dependente NÃO segue distribuição normal;
+#'H0: os resíduos seguem distribuição normal;
+#'Ha: os resíduos NÃO seguem distribuição normal;
 #'
 #'
 #'Análise gráfica
@@ -237,9 +237,9 @@ ggplot(dados, aes(sample = res_Stud)) +
 shapiro.test(res_Stud)
 
 #'
-#'Conclusão: Os dados não seguem uma distribuição normal, 
+#'Conclusão: Os residuos não seguem uma distribuição normal, 
 #'então podemos usar métodos não paramétricos ou buscar 
-#'uma transformação para normalizar os dados. 
+#'uma transformação para normalizar os residuos. 
 #'
 
 
@@ -263,7 +263,8 @@ dados_aum
 
 # Transformar os dados no formato longo para facilitar a plotagem
 data_long <- dados_aum %>%
-  pivot_longer(cols = c(y_orig_c, raiz_y, log_y, raiz_cubica_y), names_to = "variavel", values_to = "valor")
+  pivot_longer(cols = c(y_orig_c, raiz_y, log_y, raiz_cubica_y), 
+               names_to = "variavel", values_to = "valor")
 
 
 
@@ -341,17 +342,18 @@ dev.off() # Fecha a janela gráfica
 
 #'Transformação Box-cox
 
-MASS::boxcox(dados_aum$y_orig_c ~ dados_aum$trat,ylab="logaritmo da 
+MASS::boxcox(dados_aum$y_orig_c ~ dados_aum$trat,ylab="Logaritmo da 
        verossimilhança") #lambda=0,5.
 
 #' Análise dos Dados Transformados
-dados$yt<- (y+0.01)^0.5
+dados$yt<- (y+0.5)^0.5
 modelot<- lm(yt ~ trat, dados)
 
 #' ## Verificação da normalidade dos resíduos
 qqnorm(rstandard(modelot), xlab="Quantis da distribuição 
        normal", ylab="Resíduos Studentizados")
 qqline(rstandard(modelot), col=2)
+
 shapiro.test(rstandard(modelot))
 
 #'Verificação da homogeneidade de variâncias
@@ -383,7 +385,7 @@ abline(h=0)
 #'
 #'Transformação Box-Cox 
 #'
-MASS::boxcox(modelot,ylab="logaritmo da verossimilhança")
+MASS::boxcox(modelot,ylab="Logaritmo da verossimilhança")
 
 #'
 #'Análise de variância para os dados transformados

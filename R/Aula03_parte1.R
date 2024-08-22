@@ -80,7 +80,7 @@ estat_descr_dql
 #'H0: mu1 = mu2 =...= muI = mu
 #'Ha: pelo menos duas médias populacionais diferem entre si.
 #'
-mod_dql <- aov(prod ~ linha+coluna+trat, data = dados_dql)
+mod_dql <- lm(prod ~ linha+coluna+trat, data = dados_dql)
 anova(mod_dql)
 
 # F tabelado 5%
