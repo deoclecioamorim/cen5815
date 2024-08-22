@@ -79,7 +79,8 @@ estat_descr_dbc
 #'H0: mu1 = mu2 =...= muI = mu
 #'Ha: pelo menos duas médias populacionais diferem entre si.
 #'
-mod_dbc <- lm(num_fruto ~ bloco+trat, data = dados_dbc)
+mod_dbc <- lm(num_fruto ~ 1+bloco+trat, data = dados_dbc)
+summary(mod_dbc)
 anova(mod_dbc)
 
 # F tabelado 1%

@@ -131,10 +131,10 @@ class(d)
 #'
 #'-listas
 #'
-lista <- list(vetor_a = a,
+lista<- list(vetor_a = a,
               matrix_d = d,
               df = dados)
-lista$matrix_d
+lista$df
 #'
 #'-funções
 #'Média
@@ -160,7 +160,6 @@ mean(a)
 #'de uma usina. Segue-se os dados:
 #'
 pc <- c(1.58, 1.76, 1.38, 1.71, 1.50, 1.32, 1.51, 1.55, 1.54, 1.67)
-
 #Na unha
 #'
 #'-Média 
@@ -203,7 +202,7 @@ library(tidyverse)
 
 #'
 #'
-#install.packages("readxl", "tidyverse", dep=TRUE)
+install.packages("readxl", "tidyverse", dep=TRUE)
 #Tools -> Install packages
 
 #Auto instalação
